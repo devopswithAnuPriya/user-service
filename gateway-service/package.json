@@ -1,0 +1,13 @@
+{
+  "name": "gateway-service",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Practice API Gateway for Docker and Docker Compose",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

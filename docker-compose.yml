@@ -1,0 +1,43 @@
+
+services:
+
+  # User Microservice
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - microservices-network
+
+  # Product Microservice
+  product-service:
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    networks:
+      - microservices-network
+
+  # Gateway Microservice
+  gateway-service:
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    environment:
+      USER_SERVICE_URL: http://user-service:3000
+      PRODUCT_SERVICE_URL: http://product-service:3001
+    depends_on:
+      - user-service
+      - product-service
+    networks:
+      - microservices-network
+
+# Create shared network
+networks:
+  microservices-network:
+    driver: bridge
